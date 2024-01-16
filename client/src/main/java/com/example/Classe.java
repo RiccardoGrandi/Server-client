@@ -53,7 +53,7 @@ public class Classe {
 
     public String toString(){
         String s = "";
-        s += "Classe: " + numero + sezione + " - Aula: " + aula;
+        s += "Classe: " + numero + sezione + " - Aula: " + aula + "\n";
         for (Alunno alunno : alunni) {
             s += alunno.toString() + "\n";
         }

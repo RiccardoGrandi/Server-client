@@ -1,37 +1,47 @@
 package com.example;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.InputStreamReader;
+import java.io.File;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Date;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 public class App 
 {
     public static void main( String[] args )
     {
+        Alunno a1 = new Alunno("Mattia", "Pascal", new Date(1904 - 1900, 0, 1));
+        Alunno a2 = new Alunno("Riccardo","Grandi", new Date(2005 - 1900, 0, 20));
+        Alunno a3 = new Alunno("Anatolie", "Pavlov", new Date(2003 - 1900, 11, 10));
+        Alunno a4 = new Alunno("Alessio", "Didi", new Date(2005 - 1900, 4, 03));
+        Alunno a5 = new Alunno("Gigi", "Topo", new Date(2004 - 1900, 1, 28));
+
+        ArrayList<Alunno> alunni = new ArrayList<>();
+        alunni.add(a1);
+        alunni.add(a2);
+        alunni.add(a3);
+        alunni.add(a4);
+        alunni.add(a5);
+
+        Classe classe = new Classe(5, "^DIA", "08-2W", alunni);
+        
         try{
             ServerSocket server = new ServerSocket(3000);
-
-            Studente s1 = new Studente("Mattia", "Pascal", 15);
-            Studente s2 = new Studente("Riccardo","Grandi", 19);
-            Studente s3 = new Studente("Anatolie", "Pavlov", 20);
-            Studente s4 = new Studente("Alessio", "Didilescu", 18);
-            Studente s5 = new Studente("Gigi", "Topo", 6);
-
-            Classe c = new Classe("5^DIA", "Francesco Capezio");
-            c.addStudente(s1);
-            c.addStudente(s2);
-            c.addStudente(s3);
-            c.addStudente(s4);
-            c.addStudente(s5);
 
             System.out.println("il server è in ascolto");
             Socket s = server.accept();
 
             DataOutputStream out = new DataOutputStream(s.getOutputStream());
 
-            out.writeBytes(c.toString() + "\n");
+            XmlMapper xmlMapper = new XmlMapper();
+            String cls = xmlMapper.writeValueAsString(classe);
+            System.out.println(cls);
+
+            out.writeBytes(cls + "\n");
 
             s.close();
             server.close();

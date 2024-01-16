@@ -15,7 +15,10 @@ public class App
             // DataOutputStream out = new DataOutputStream(s.getOutputStream());
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
-            System.out.println(in.readLine());
+            String mess = ""; 
+            while((mess = in.readLine()) != null ){
+                System.out.println(mess);
+            }
             
             s.close();
 

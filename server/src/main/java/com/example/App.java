@@ -19,7 +19,7 @@ public class App
             Studente s4 = new Studente("Alessio", "Didilescu", 18);
             Studente s5 = new Studente("Gigi", "Topo", 6);
 
-            Classe c = new Classe("5^DIA", "Capezio");
+            Classe c = new Classe("5^DIA", "Francesco Capezio");
             c.addStudente(s1);
             c.addStudente(s2);
             c.addStudente(s3);
@@ -29,10 +29,9 @@ public class App
             System.out.println("il server è in ascolto");
             Socket s = server.accept();
 
-            // BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             DataOutputStream out = new DataOutputStream(s.getOutputStream());
 
-            out.writeBytes(c.inviaClasse() + "\n");
+            out.writeBytes(c.toString() + "\n");
 
             s.close();
             server.close();

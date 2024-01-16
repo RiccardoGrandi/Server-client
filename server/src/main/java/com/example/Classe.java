@@ -21,15 +21,13 @@ public class Classe {
         return this.studenti;
     }*/
 
-    public String inviaClasse() {
-        String c = "";
-
-        c += "classe: " + sezione + " - Coordinatore: " + coordinatore + " --- ";
-        
+    public String toString(){
+        String s = "";
+        s += "Classe: " + sezione + " - Coordinatore: " + coordinatore + "\n";
         for (Studente studente : studenti) {
-            c += "Studente: " + studente.toString() + " ---- ";
+            s += studente.toString() + "\n";
+
         }
-        
-        return c;
+        return s;
     }
 }
